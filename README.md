@@ -20,11 +20,21 @@ The raw World Bank series are pulled from the World Bank API in `data/raw_data/`
 
 - `world_bank_gdp_urban_2000_2024.csv`
 
-This file contains combined country-year records for:
+This file contains combined country-year records for the original World Bank indicators:
 
-- `country_code`
-- `country`
-- `year`
+- `country_code` (country ISO code)
+- `country` (country name)
+- `year` (calendar year)
+- `real_gdp_per_capita` (derived from World Bank series `NY.GDP.PCAP.KD`)
+- `urban_population` (derived from World Bank series `SP.URB.TOTL.IN.ZS`)
+
+The original World Bank variable names used in the download and merge step are:
+
+- `NY.GDP.PCAP.KD` — Real GDP per capita (constant 2015 US$)
+- `SP.URB.TOTL.IN.ZS` — Urban population (% of total population)
+
+These are renamed in the cleaned project data into the more interpretable project columns:
+
 - `real_gdp_per_capita`
 - `urban_population`
 
