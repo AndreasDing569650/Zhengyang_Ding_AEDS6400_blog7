@@ -2,7 +2,7 @@
 
 ## Project Overview
 
-This project examines the relationship between urban population share and real GDP per capita across countries from 2000 to 2024 using World Bank indicators. The analysis is designed to show how countries with higher income levels tend to have different urbanization patterns and how that relationship evolves over time.
+This project examines the relationship between urban population share and real GDP per capita across countries from 2000 to 2024 using World Bank indicators. The analysis is designed to show how countries move through the urbanization–income space over time and how that relationship changes across regions.
 
 The repository follows a simple reproducible workflow:
 
@@ -38,17 +38,18 @@ This cleaned dataset adds a `continent` field and removes aggregate world-region
 
 ```text
 Zhengyang_Ding_AEDS6400_blog7/
+├── .gitignore
 ├── README.md
 ├── Zhengyang_Ding_AEDS6400_blog7.Rproj
 ├── code/
-│   ├── data_scrape.R
 │   ├── data_clean.R
-│   └── data_plot.R
+│   ├── data_plot.R
+│   └── data_scrape.R
 ├── data/
-│   ├── raw_data/
-│   │   └── world_bank_gdp_urban_2000_2024.csv
-│   └── cleaned_data/
-│       └── world_bank_gdp_urban_country_2000_2024.csv
+│   ├── cleaned_data/
+│   │   └── world_bank_gdp_urban_country_2000_2024.csv
+│   └── raw_data/
+│       └── world_bank_gdp_urban_2000_2024.csv
 └── figure/
     └── gdp_urban_interactive.html
 ```
@@ -125,7 +126,7 @@ Open the HTML file in a browser to explore the animated relationship between GDP
 
 ## Expected Interpretation
 
-The project is designed to examine whether countries with higher real GDP per capita also tend to have larger urban populations. A positive relationship would suggest that economic development and urbanization are strongly associated, while the animation helps reveal whether that pattern becomes stronger or weaker across years.
+The project is designed to examine whether countries with higher real GDP per capita also tend to have larger urban populations. A positive relationship would suggest that economic development and urbanization are closely linked across the global country panel.
 
 By comparing countries within and across continents, the project provides a concise but informative macro-level view of how economic development and urbanization evolve together.
 
@@ -138,3 +139,5 @@ The workflow is intentionally modular:
 - `data_plot.R` generates the actual analytical output.
 
 This separation keeps the project easy to extend, debug, and rerun.
+
+The repository is configured to keep all required data, scripts, and generated analytical outputs tracked, while ignoring only transient editor, system, and R runtime files.

@@ -1,0 +1,27 @@
+# R project files
+.Rproj.user/
+.Rhistory
+.RData
+.RDataTmp
+.Ruserdata
+
+# Editor/IDE files
+.vscode/
+.idea/
+
+# OS-generated files
+.DS_Store
+**/.DS_Store
+Thumbs.db
+Desktop.ini
+
+# Temporary / cache files
+*.tmp
+*.temp
+*.log
+*.bak
+*.orig
+
+# Optional: local secret or OAuth files if ever used in R
+.httr-oauth
+.httr-oauth-SW
