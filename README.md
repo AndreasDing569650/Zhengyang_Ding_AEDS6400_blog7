@@ -33,11 +33,6 @@ The original World Bank variable names used in the download and merge step are:
 - `NY.GDP.PCAP.KD` — Real GDP per capita (constant 2015 US$)
 - `SP.URB.TOTL.IN.ZS` — Urban population (% of total population)
 
-These are renamed in the cleaned project data into the more interpretable project columns:
-
-- `real_gdp_per_capita`
-- `urban_population`
-
 The cleaned country-level dataset is stored in `data/cleaned_data/`:
 
 - `world_bank_gdp_urban_country_2000_2024.csv`
@@ -139,15 +134,3 @@ Open the HTML file in a browser to explore the animated relationship between GDP
 The project is designed to examine whether countries with higher real GDP per capita also tend to have larger urban populations. A positive relationship would suggest that economic development and urbanization are closely linked across the global country panel.
 
 By comparing countries within and across continents, the project provides a concise but informative macro-level view of how economic development and urbanization evolve together.
-
-## Notes
-
-The workflow is intentionally modular:
-
-- `data_scrape.R` obtains the raw inputs,
-- `data_clean.R` standardizes and filters the data,
-- `data_plot.R` generates the actual analytical output.
-
-This separation keeps the project easy to extend, debug, and rerun.
-
-The repository is configured to keep all required data, scripts, and generated analytical outputs tracked, while ignoring only transient editor, system, and R runtime files.
