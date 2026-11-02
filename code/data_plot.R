@@ -14,12 +14,25 @@ library(plotly)
 
 
 # ============================================================
-# 1. Load cleaned data
+# 1. Load cleaned data from the repo data folder
 # ============================================================
 
-world_data <- read.csv(
-  "D:/Rproject/6400-blog7/world_bank_gdp_urban_country_2000_2024.csv"
-)
+repo_root <- if (dir.exists(file.path(getwd(), "data"))) {
+  getwd()
+} else if (dir.exists(file.path(getwd(), "..", "data"))) {
+  normalizePath(file.path(getwd(), ".."), winslash = "/", mustWork = TRUE)
+} else {
+  getwd()
+}
+
+input_path <- file.path(repo_root, "data", "cleaned_data", "world_bank_gdp_urban_country_2000_2024.csv")
+raw_url <- "https://raw.githubusercontent.com/AndreasDing569650/Zhengyang_Ding_AEDS6400_blog7/main/data/cleaned_data/world_bank_gdp_urban_country_2000_2024.csv"
+
+world_data <- if (file.exists(input_path)) {
+  read.csv(input_path, stringsAsFactors = FALSE)
+} else {
+  read.csv(raw_url, stringsAsFactors = FALSE)
+}
 
 head(world_data)
 str(world_data)
@@ -249,11 +262,14 @@ p
 
 
 # ============================================================
-# 11. Save interactive visualization
+# 11. Save interactive visualization inside the repo figure folder
 # ============================================================
+
+figure_dir <- file.path(repo_root, "figure")
+dir.create(figure_dir, recursive = TRUE, showWarnings = FALSE)
 
 htmlwidgets::saveWidget(
   p,
-  "gdp_urban_interactive.html",
+  file.path(figure_dir, "gdp_urban_interactive.html"),
   selfcontained = TRUE
 )
