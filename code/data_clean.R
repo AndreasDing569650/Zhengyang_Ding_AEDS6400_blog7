@@ -1,8 +1,5 @@
 library(dplyr)
 
-# Read the raw data using a repository-relative path.
-# This works when the project is cloned locally and avoids Windows-specific paths.
-# If the file is not present locally, fall back to the GitHub raw URL.
 input_path <- file.path("data", "raw_data", "world_bank_gdp_urban_2000_2024.csv")
 raw_url <- "https://raw.githubusercontent.com/AndreasDing569650/Zhengyang_Ding_AEDS6400_blog7/main/data/raw_data/world_bank_gdp_urban_2000_2024.csv"
 
