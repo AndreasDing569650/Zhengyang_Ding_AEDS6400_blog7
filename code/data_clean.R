@@ -1,6 +1,14 @@
 library(dplyr)
 
-input_path <- file.path("data", "raw_data", "world_bank_gdp_urban_2000_2024.csv")
+repo_root <- if (dir.exists(file.path(getwd(), "data"))) {
+  getwd()
+} else if (dir.exists(file.path(getwd(), "..", "data"))) {
+  normalizePath(file.path(getwd(), ".."), winslash = "/", mustWork = TRUE)
+} else {
+  getwd()
+}
+
+input_path <- file.path(repo_root, "data", "raw_data", "world_bank_gdp_urban_2000_2024.csv")
 raw_url <- "https://raw.githubusercontent.com/AndreasDing569650/Zhengyang_Ding_AEDS6400_blog7/main/data/raw_data/world_bank_gdp_urban_2000_2024.csv"
 
 world_data <- if (file.exists(input_path)) {
@@ -175,7 +183,7 @@ table(
 # Save cleaned country-level data
 # ============================================================
 
-output_path <- file.path("data", "cleaned_data", "world_bank_gdp_urban_country_2000_2024.csv")
+output_path <- file.path(repo_root, "data", "cleaned_data", "world_bank_gdp_urban_country_2000_2024.csv")
 dir.create(dirname(output_path), recursive = TRUE, showWarnings = FALSE)
 
 write.csv(
