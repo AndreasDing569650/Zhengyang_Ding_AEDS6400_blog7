@@ -1,8 +1,16 @@
 library(dplyr)
 
-world_data <- read.csv(
-  "D:/Rproject/6400-blog7/world_bank_gdp_urban_2000_2024.csv"
-)
+# Read the raw data using a repository-relative path.
+# This works when the project is cloned locally and avoids Windows-specific paths.
+# If the file is not present locally, fall back to the GitHub raw URL.
+input_path <- file.path("data", "raw_data", "world_bank_gdp_urban_2000_2024.csv")
+raw_url <- "https://raw.githubusercontent.com/AndreasDing569650/Zhengyang_Ding_AEDS6400_blog7/main/data/raw_data/world_bank_gdp_urban_2000_2024.csv"
+
+world_data <- if (file.exists(input_path)) {
+  read.csv(input_path, stringsAsFactors = FALSE)
+} else {
+  read.csv(raw_url, stringsAsFactors = FALSE)
+}
 
 # ============================================================
 # 1. Show all unique entities
@@ -80,7 +88,7 @@ continent_data <- data.frame(
     "NAM", "NER", "NGA", "RWA", "STP", "SEN",
     "SLE", "SOM", "ZAF", "SSD", "SDN", "TZA",
     "TGO", "TUN", "UGA", "ZMB", "ZWE",
-    
+
     # Asia
     "AFG", "ARM", "AZE", "BHR", "BGD", "BTN",
     "BRN", "KHM", "CHN", "CYP", "GEO", "HKG",
@@ -91,7 +99,7 @@ continent_data <- data.frame(
     "KOR", "LKA", "SYR", "TJK", "THA", "TLS",
     "TUR", "TKM", "ARE", "UZB", "VNM", "PSE",
     "YEM",
-    
+
     # Europe
     "ALB", "AUT", "BLR", "BEL", "BIH", "BGR",
     "HRV", "CZE", "DNK", "EST", "FIN", "FRA",
@@ -100,42 +108,42 @@ continent_data <- data.frame(
     "NLD", "MKD", "NOR", "POL", "PRT", "ROU",
     "RUS", "SRB", "SVK", "SVN", "ESP", "SWE",
     "CHE", "UKR", "GBR",
-    
+
     # North America
     "BHS", "BRB", "BLZ", "CAN", "CRI", "CUB",
     "DOM", "SLV", "GTM", "HTI", "HND", "JAM",
     "MEX", "NIC", "PAN", "PRI", "TTO", "USA",
     "VIR",
-    
+
     # South America
     "ARG", "BOL", "BRA", "CHL", "COL", "ECU",
     "GUY", "PRY", "PER", "SUR", "URY", "VEN",
-    
+
     # Oceania
     "AUS", "FJI", "GUM", "NCL", "NZL", "PNG",
     "WSM", "SLB", "TON", "VUT", "PYF"
   ),
-  
+
   continent = c(
     # Africa
     rep("Africa", 53),
-    
+
     # Asia
     rep("Asia", 49),
-    
+
     # Europe
     rep("Europe", 39),
-    
+
     # North America
     rep("North America", 19),
-    
+
     # South America
     rep("South America", 12),
-    
+
     # Oceania
     rep("Oceania", 11)
   ),
-  
+
   stringsAsFactors = FALSE
 )
 
@@ -170,8 +178,11 @@ table(
 # Save cleaned country-level data
 # ============================================================
 
+output_path <- file.path("data", "cleaned_data", "world_bank_gdp_urban_country_2000_2024.csv")
+dir.create(dirname(output_path), recursive = TRUE, showWarnings = FALSE)
+
 write.csv(
   world_data_country,
-  "D:/Rproject/6400-blog7/world_bank_gdp_urban_country_2000_2024.csv",
+  output_path,
   row.names = FALSE
 )
