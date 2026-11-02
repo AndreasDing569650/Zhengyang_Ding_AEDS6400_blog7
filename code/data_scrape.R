@@ -1,6 +1,16 @@
 library(jsonlite)
 library(dplyr)
 
+repo_root <- if (dir.exists(file.path(getwd(), "data"))) {
+  getwd()
+} else if (dir.exists(file.path(getwd(), "..", "data"))) {
+  normalizePath(file.path(getwd(), ".."), winslash = "/", mustWork = TRUE)
+} else {
+  getwd()
+}
+
+raw_data_dir <- file.path(repo_root, "data", "raw_data")
+dir.create(raw_data_dir, recursive = TRUE, showWarnings = FALSE)
 
 # ============================================================
 # 1. Download Real GDP per Capita
@@ -96,11 +106,13 @@ summary(world_data)
 
 
 # ============================================================
-# 5. Save the Cleaned Dataset
+# 5. Save the Cleaned Dataset to the repo data/raw_data folder
 # ============================================================
+
+output_path <- file.path(raw_data_dir, "world_bank_gdp_urban_2000_2024.csv")
 
 write.csv(
   world_data,
-  "world_bank_gdp_urban_2000_2024.csv",
+  output_path,
   row.names = FALSE
 )
